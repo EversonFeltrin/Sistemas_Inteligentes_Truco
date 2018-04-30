@@ -1,0 +1,25 @@
+<TextFileConfiguration>
+	<FilePath>trucoCBR/base.csv</FilePath>
+	<Delimiters>,</Delimiters>
+	<DescriptionClassName>trucoCBR/TrucoDescription.java</DescriptionClassName>
+	<DescriptionMappings>
+		<map>IDCaso</map>	
+		<map>indJogadorMao</map>
+		<map>cartaRobo1</map>
+		<map>cartaRobo2</map>
+		<map>cartaRobo3</map>
+		<map>cartaRodada1Robo</map>
+		<map>CartaRodada1Humano</map>
+		<map>ganhadorRodada1</map>
+		<map>cartaRodada2Robo</map>
+		<map>cartaRodada2Humano</map>
+		<map>ganhadorRodada2</map>
+		<map>cartaRodada3Robo</map>
+		<map>cartaRodada3Humano</map>
+		<map>ganhadorRodada3</map>
+		<map>cartaHumano1</map>
+		<map>cartaHumano2</map>
+		<map>cartaHumano3</map>
+		<map>quemVenceuMao</map>		
+	</DescriptionMappings>	
+</TextFileConfiguration>
