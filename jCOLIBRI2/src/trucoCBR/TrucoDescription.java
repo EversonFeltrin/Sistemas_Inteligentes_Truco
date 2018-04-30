@@ -4,10 +4,8 @@ import jcolibri.cbrcore.Attribute;
 import jcolibri.cbrcore.CaseComponent;
 
 public class TrucoDescription implements CaseComponent {
-
-	/* por enquanto estão somente os atributos da tabela apenastruco.csv */
-	Integer IDCaso;	// atributo criado para os IDS IdPartida e IdMao virar um ID unico.
-	// 10 = humano e 20 = robo
+	
+	Integer IDCaso;	
 	Integer indJogadorMao;
 	Integer cartaRobo1;
 	Integer cartaRobo2;
@@ -16,7 +14,7 @@ public class TrucoDescription implements CaseComponent {
 	Integer cartaRodada1Humano;
 	Integer ganhadorRodada1;
 	Integer cartaRodada2Robo;
-	Integer caraRodada2Humano;
+	Integer cartaRodada2Humano;
 	Integer ganhadorRodada2;
 	Integer cartaRodada3Robo;
 	Integer cartaRodada3Humano;
@@ -63,7 +61,7 @@ public class TrucoDescription implements CaseComponent {
 	}
 
 	public void setCaraRodada2Humano(Integer caraRodada2Humano) {
-		this.caraRodada2Humano = caraRodada2Humano;
+		this.cartaRodada2Humano = caraRodada2Humano;
 	}
 
 	public void setGanhadorRodada2(Integer ganhadorRodada2) {
@@ -96,6 +94,78 @@ public class TrucoDescription implements CaseComponent {
 
 	public void setQuemVenceuMao(Integer quemVenceuMao) {
 		this.quemVenceuMao = quemVenceuMao;
+	}
+
+	public Integer getIDCaso() {
+		return IDCaso;
+	}
+
+	public Integer getIndJogadorMao() {
+		return indJogadorMao;
+	}
+
+	public Integer getCartaRobo1() {
+		return cartaRobo1;
+	}
+
+	public Integer getCartaRobo2() {
+		return cartaRobo2;
+	}
+
+	public Integer getCartaRobo3() {
+		return cartaRobo3;
+	}
+
+	public Integer getCartaRodada1Robo() {
+		return cartaRodada1Robo;
+	}
+
+	public Integer getCartaRodada1Humano() {
+		return cartaRodada1Humano;
+	}
+
+	public Integer getGanhadorRodada1() {
+		return ganhadorRodada1;
+	}
+
+	public Integer getCartaRodada2Robo() {
+		return cartaRodada2Robo;
+	}
+
+	public Integer getCartaRodada2Humano() {
+		return cartaRodada2Humano;
+	}
+
+	public Integer getGanhadorRodada2() {
+		return ganhadorRodada2;
+	}
+
+	public Integer getCartaRodada3Robo() {
+		return cartaRodada3Robo;
+	}
+
+	public Integer getCartaRodada3Humano() {
+		return cartaRodada3Humano;
+	}
+
+	public Integer getGanhadorRodada3() {
+		return ganhadorRodada3;
+	}
+
+	public Integer getCartaHumano1() {
+		return cartaHumano1;
+	}
+
+	public Integer getCartaHumano2() {
+		return cartaHumano2;
+	}
+
+	public Integer getCartaHumano3() {
+		return cartaHumano3;
+	}
+
+	public Integer getQuemVenceuMao() {
+		return quemVenceuMao;
 	}
 
 	@Override

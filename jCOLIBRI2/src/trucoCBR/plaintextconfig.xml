@@ -1,7 +1,7 @@
 <TextFileConfiguration>
 	<FilePath>trucoCBR/base.csv</FilePath>
 	<Delimiters>,</Delimiters>
-	<DescriptionClassName>trucoCBR/TrucoDescription.java</DescriptionClassName>
+	<DescriptionClassName>trucoCBR.TrucoDescription</DescriptionClassName>
 	<DescriptionMappings>
 		<map>IDCaso</map>	
 		<map>indJogadorMao</map>
@@ -9,7 +9,7 @@
 		<map>cartaRobo2</map>
 		<map>cartaRobo3</map>
 		<map>cartaRodada1Robo</map>
-		<map>CartaRodada1Humano</map>
+		<map>cartaRodada1Humano</map>
 		<map>ganhadorRodada1</map>
 		<map>cartaRodada2Robo</map>
 		<map>cartaRodada2Humano</map>

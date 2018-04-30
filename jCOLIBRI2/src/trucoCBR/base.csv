@@ -1,4 +1,4 @@
-IDCaso,indJogadorMao,cartaRobo1,cartaRobo2,cartaRobo3,cartaRodada1Robo,CartaRodada1Humano,ganhadorRodada1,cartaRodada2Robo,cartaRodada2Humano,ganhadorRodada2,cartaRodada3Robo,cartaRodada3Humano,ganhadorRodada3,cartaHumano1,cartaHumano2,cartaHumano3,quemVenceuMao
+#IDCaso,indJogadorMao,cartaRobo1,cartaRobo2,cartaRobo3,cartaRodada1Robo,CartaRodada1Humano,ganhadorRodada1,cartaRodada2Robo,cartaRodada2Humano,ganhadorRodada2,cartaRodada3Robo,cartaRodada3Humano,ganhadorRodada3,cartaHumano1,cartaHumano2,cartaHumano3,quemVenceuMao
 2,20,52,62,60,53,10,20,63,91,10,62,30,20,10,91,30,20
 3,20,52,62,60,62,10,20,52,91,10,62,30,20,10,91,30,20
 5,20,11,0,40,42,70,10,11,2,20,0,80,10,70,2,80,10
