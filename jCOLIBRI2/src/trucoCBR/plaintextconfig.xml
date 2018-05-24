@@ -1,25 +1,24 @@
 <TextFileConfiguration>
-	<FilePath>trucoCBR/base.csv</FilePath>
+	<FilePath>trucoCBR/base.txt</FilePath>
 	<Delimiters>,</Delimiters>
 	<DescriptionClassName>trucoCBR.TrucoDescription</DescriptionClassName>
 	<DescriptionMappings>
-		<map>IDCaso</map>	
-		<map>indJogadorMao</map>
-		<map>cartaRobo1</map>
-		<map>cartaRobo2</map>
-		<map>cartaRobo3</map>
-		<map>cartaRodada1Robo</map>
-		<map>cartaRodada1Humano</map>
-		<map>ganhadorRodada1</map>
-		<map>cartaRodada2Robo</map>
-		<map>cartaRodada2Humano</map>
-		<map>ganhadorRodada2</map>
-		<map>cartaRodada3Robo</map>
-		<map>cartaRodada3Humano</map>
-		<map>ganhadorRodada3</map>
-		<map>cartaHumano1</map>
-		<map>cartaHumano2</map>
-		<map>cartaHumano3</map>
-		<map>quemVenceuMao</map>		
+		<Map>indJogadorMao</Map>
+		<Map>cartaRobo1</Map>
+		<Map>cartaRobo2</Map>
+		<Map>cartaRobo3</Map>
+		<Map>cartaRodada1Robo</Map>
+		<Map>cartaRodada1Humano</Map>
+		<Map>ganhadorRodada1</Map>
+		<Map>cartaRodada2Robo</Map>
+		<Map>cartaRodada2Humano</Map>
+		<Map>ganhadorRodada2</Map>
+		<Map>cartaRodada3Robo</Map>
+		<Map>cartaRodada3Humano</Map>
+		<Map>ganhadorRodada3</Map>
+		<Map>cartaHumano1</Map>
+		<Map>cartaHumano2</Map>
+		<Map>cartaHumano3</Map>
+		<Map>quemVenceuMao</Map>
 	</DescriptionMappings>	
 </TextFileConfiguration>

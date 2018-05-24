@@ -1,5 +1,9 @@
 package trucoCBR;
 
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
+
 import jcolibri.cbrcore.Attribute;
 import jcolibri.cbrcore.CaseComponent;
 
@@ -30,8 +34,8 @@ public class TrucoDescription implements CaseComponent {
 
 	public void setIndJogadorMao(Integer indJogadorMao) {
 		this.indJogadorMao = indJogadorMao;
-	}
-
+	}	
+	
 	public void setCartaRobo1(Integer cartaRobo1) {
 		this.cartaRobo1 = cartaRobo1;
 	}
@@ -60,8 +64,8 @@ public class TrucoDescription implements CaseComponent {
 		this.cartaRodada2Robo = cartaRodada2Robo;
 	}
 
-	public void setCaraRodada2Humano(Integer caraRodada2Humano) {
-		this.cartaRodada2Humano = caraRodada2Humano;
+	public void setCartaRodada2Humano(Integer cartaRodada2Humano) {
+		this.cartaRodada2Humano = cartaRodada2Humano;
 	}
 
 	public void setGanhadorRodada2(Integer ganhadorRodada2) {
@@ -167,11 +171,14 @@ public class TrucoDescription implements CaseComponent {
 	public Integer getQuemVenceuMao() {
 		return quemVenceuMao;
 	}
-
-	@Override
+	
 	public Attribute getIdAttribute() {
-		// TODO Auto-generated method stub
-		return null;
+		return new Attribute("IDCaso", this.getClass());
+	}
+	
+	public String toString()
+	{
+		return IDCaso+","+indJogadorMao+","+cartaRobo1+","+cartaRobo2+","+cartaRobo3+","+cartaRodada1Robo+","+cartaRodada1Humano+","+ganhadorRodada1+","+cartaRodada2Robo+","+cartaRodada2Humano+","+ganhadorRodada2+","+cartaRodada3Robo+","+cartaRodada3Humano+","+ganhadorRodada3+","+cartaHumano1+","+cartaHumano2+","+cartaHumano3+","+quemVenceuMao;
 	}
 	
 }
