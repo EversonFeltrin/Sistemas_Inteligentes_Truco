@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Collections;
 import java.util.List;
+import java.util.Scanner;
 
 import jcolibri.casebase.LinealCaseBase;
 import jcolibri.cbrcore.Attribute;
@@ -34,6 +35,7 @@ public class TrucoCBR {
 	CBRCaseBase _caseBase;
 	static TrucoDescription current_best_case = null;
 	static TrucoDescription current_game_state = null;
+	private static Scanner scanner = new Scanner( System.in );
 	
 	int current_tipo_consulta = 0;
 	static final int DEFAULT = 0;
@@ -138,7 +140,7 @@ public class TrucoCBR {
 		Collection<RetrievalResult> eval = NNScoringMethod.evaluateSimilarity(_caseBase.getCases(), query, simConfig);
 
 		// Select k cases
-		eval = SelectCases.selectTopKRR(eval, 4);
+		eval = SelectCases.selectTopKRR(eval, 1);
 		
 		System.out.println("Retrieved cases:");
 		for(RetrievalResult nse: eval)
@@ -153,24 +155,133 @@ public class TrucoCBR {
 		cartasOrdenadas = retornaListaCarta(cartasOrdenadas);
 		
 		
-		System.out.println("best carta rodada 1 robo" + best.getCartaRodada1Robo());
+		System.out.println("best carta rodada 1 robo: " + best.getCartaRodada1Robo());
 		
 		int alta = cartasOrdenadas.get(0);
 		int media = cartasOrdenadas.get(1);
 		int baixa = cartasOrdenadas.get(2);
 		System.out.println(alta + " " + media + " " + baixa + " ");
 
-			if(best.getCartaRodada1Robo() == alta) {
-				current_game_state.setCartaRodada1Robo(alta);
-			}else if(best.getCartaRodada1Robo() == media) {
-				current_game_state.setCartaRodada1Robo(media);
-			}else if(best.getCartaRodada1Robo() == baixa){
-				current_game_state.setCartaRodada1Robo(baixa);
-			}
-			
+		int dalta = Math.abs(best.getCartaRodada1Robo() - alta);
+		int dmedia = Math.abs(best.getCartaRodada1Robo() - media);
+		int dbaixa = Math.abs(best.getCartaRodada1Robo() - baixa);
+		
+		System.out.println("distancias das cartas");
+		System.out.println(dalta + " " + dmedia + " " + dbaixa + " ");
+		
+		List<Integer> distanciaCartas = new ArrayList<Integer>();
+		distanciaCartas.add(dalta);
+		distanciaCartas.add(dmedia);
+		distanciaCartas.add(dbaixa);
+		
+		distanciaCartas = retornaListaCarta(distanciaCartas);
+		
+		int menorDistancia = distanciaCartas.get(0);
+		
+		
+		if(dalta == menorDistancia) {
+			current_game_state.setCartaRodada1Robo(alta);
+		}else if(dmedia == menorDistancia) {
+			current_game_state.setCartaRodada1Robo(media);
+		}else if(dbaixa == menorDistancia){
+			current_game_state.setCartaRodada1Robo(baixa);
+		}
+		System.out.println("Carta jogada 1 rodada Robo");
 		System.out.println(current_game_state.getCartaRodada1Robo());
 		
 	}
+	
+	//----------------------------------------------------------
+	public void getJogadaRoboRodada2(CBRQuery query) throws ExecutionException{
+		
+		NNConfig simConfig = new NNConfig();
+		simConfig.setDescriptionSimFunction(new Average());
+		Attribute cartaRobo1 = new Attribute("cartaRobo1", TrucoDescription.class);
+		simConfig.addMapping(cartaRobo1, new Interval(130)); 
+		simConfig.setWeight(cartaRobo1, 5.0);
+		
+		Attribute cartaRobo2 = new Attribute("cartaRobo2", TrucoDescription.class);
+		simConfig.addMapping(cartaRobo2, new Interval(130)); 
+		simConfig.setWeight(cartaRobo2, 5.0);
+		
+		Attribute cartaRobo3 = new Attribute("cartaRobo3", TrucoDescription.class);
+		simConfig.addMapping(cartaRobo3, new Interval(130)); 
+		simConfig.setWeight(cartaRobo3, 5.0);
+		
+		Attribute cartaRodada1Humano = new Attribute("cartaRodada1Humano", TrucoDescription.class);
+		simConfig.addMapping(cartaRodada1Humano, new Interval(130));
+		simConfig.setWeight(cartaRodada1Humano, 10.0);
+		
+		Attribute cartaRodada1Robo = new Attribute("cartaRodada1Robo", TrucoDescription.class);
+		simConfig.addMapping(cartaRodada1Robo, new Interval(130));
+		simConfig.setWeight(cartaRodada1Robo, 10.0);
+		
+		Attribute cartaRodada2Humano = new Attribute("cartaRodada2Humano", TrucoDescription.class);
+		simConfig.addMapping(cartaRodada2Humano, new Interval(130));
+		simConfig.setWeight(cartaRodada2Humano, 10.0);
+		
+		Attribute ganhadorRodada1 = new Attribute("ganhadorRodada1", TrucoDescription.class);
+		simConfig.addMapping(ganhadorRodada1, new Interval(20));
+		simConfig.setWeight(ganhadorRodada1, 1.0);
+		
+		Attribute indJogadorMao = new Attribute("indJogadorMao", TrucoDescription.class);
+		simConfig.addMapping(indJogadorMao, new Interval(20));
+		simConfig.setWeight(indJogadorMao, 1.0);
+		
+		System.out.println("Query: "+query);
+		
+		Collection<RetrievalResult> eval = NNScoringMethod.evaluateSimilarity(_caseBase.getCases(), query, simConfig);
+
+		// Select k cases
+		eval = SelectCases.selectTopKRR(eval, 1);
+		
+		System.out.println("Retrieved cases:");
+		for(RetrievalResult nse: eval)
+			System.out.println(nse);
+		
+		TrucoDescription best = (TrucoDescription) eval.iterator().next().get_case().getDescription();
+		
+		List<Integer> cartasOrdenadas = new ArrayList<Integer>();
+		cartasOrdenadas.add(current_game_state.getCartaRobo1());
+		cartasOrdenadas.add(current_game_state.getCartaRobo2());
+		cartasOrdenadas.add(current_game_state.getCartaRobo3());
+		cartasOrdenadas.remove(current_game_state.cartaRodada1Robo);
+		cartasOrdenadas = retornaListaCarta(cartasOrdenadas);
+		
+		
+		System.out.println("best carta rodada 2 robo: " + best.getCartaRodada2Robo());
+		
+		int alta = cartasOrdenadas.get(0);
+		int baixa = cartasOrdenadas.get(1);
+		System.out.println("Cartas na mao");
+		System.out.println(alta + " " + baixa + " ");
+
+		int dalta = Math.abs(best.getCartaRodada2Robo() - alta);
+		int dbaixa = Math.abs(best.getCartaRodada2Robo() - baixa);
+		
+		System.out.println("distancias das cartas rodada 2");
+		System.out.println(dalta + " " + dbaixa + " ");
+		
+		List<Integer> distanciaCartas = new ArrayList<Integer>();
+		distanciaCartas.add(dalta);
+		distanciaCartas.add(dbaixa);
+		
+		distanciaCartas = retornaListaCarta(distanciaCartas);
+		
+		int menorDistancia = distanciaCartas.get(0);
+		
+		
+		if(dalta == menorDistancia) {
+			current_game_state.setCartaRodada2Robo(alta);
+		}else if(dbaixa == menorDistancia){
+			current_game_state.setCartaRodada2Robo(baixa);
+		}
+		
+		System.out.println("Carta jogada 2 rodada Robo");
+		System.out.println(current_game_state.getCartaRodada2Robo());
+		
+	}
+	//------------------------------------------------------------
 	
 	public void postCycle() throws ExecutionException {
 		_connector.close();
@@ -223,13 +334,13 @@ public class TrucoCBR {
 	}
 	
 	public void defineMao() {
-		// se for começo de jogo a mão é o player
+		// se for comeÃ§o de jogo a mÃ£o Ã© o player
 		if(current_game_state.getIndJogadorMao() == null) { 
 			current_game_state.setIndJogadorMao(10);
-		// se a mao anterior o mao foi o jogador agora é o robo
+		// se a mao anterior o mao foi o jogador agora Ã© o robo
 		}else if(current_game_state.getIndJogadorMao() == 10) { 
 			current_game_state.setIndJogadorMao(20);
-		// se a mao anterior o robo foi o robo agora é o jogador
+		// se a mao anterior o robo foi o robo agora Ã© o jogador
 		}else if(current_game_state.getIndJogadorMao() == 20) {
 			current_game_state.setIndJogadorMao(10);
 		}
@@ -244,6 +355,18 @@ public class TrucoCBR {
 		}
 		if(current_game_state.getCartaHumano3() != null){
 			System.out.print(current_game_state.getCartaHumano3() + " ");
+		}
+	}
+	
+	public void imprimeCartasRobo() {
+		if(current_game_state.getCartaRobo1() != null){
+			System.out.print(current_game_state.getCartaRobo1()+ " ");
+		}
+		if(current_game_state.getCartaRobo2() != null){
+			System.out.print(current_game_state.getCartaRobo2()+ " ");
+		}
+		if(current_game_state.getCartaRobo3() != null){
+			System.out.print(current_game_state.getCartaRobo3() + " ");
 		}
 	}
 	
@@ -270,8 +393,16 @@ public class TrucoCBR {
 		
 	}
 	
-	public void getJogadaHumano() {
-		current_game_state.setCartaRodada1Humano(current_game_state.getCartaHumano1());
+	public void getJogada1Humano() {
+		System.out.println("Choose your card:");
+		int num1 = scanner.nextInt();
+		current_game_state.setCartaRodada1Humano(num1);
+	}
+	
+	public void getJogada2Humano() {
+		System.out.println("Choose your card:");
+		int num1 = scanner.nextInt();
+		current_game_state.setCartaRodada2Humano(num1);
 	}
 	
 	
@@ -292,30 +423,42 @@ public class TrucoCBR {
 			org.apache.commons.logging.LogFactory.getLog(TrucoCBR.class).error(e);
 		}
 		
-		
 		t.distribuirCartas();
 		t.defineMao();
 		while(!fimrodada){
 			// se chegou ao fim da terceira rodada, verifica o vencedor e acaba rodada
 			if(rodada == 4) {
-				/* adicionar verificação aqui */
+				/* adicionar verificaÃ§Ã£o aqui */
 				fimrodada = true;
 			}
 			System.out.println("Suas cartas: ");
 			t.imprimeCartasHumano();
 			t.imprimeMesa(rodada);
 			if(rodada == 1) {
-				t.getJogadaHumano();
+				t.getJogada1Humano();
 				query.setDescription(current_game_state);
 				t.getJogadaRoboRodada1(query);
-				current_game_state.setCartaRodada1Robo(0);
 				if(current_game_state.getCartaRodada1Humano() > current_game_state.getCartaRodada1Robo()) {
+					System.out.println("Ganhou Humano Rodada1");
 					current_game_state.setGanhadorRodada1(10);
-				}else 
+				}else {
+					System.out.println("Ganhou Robo Rodada1");
 					current_game_state.setGanhadorRodada1(20);
+				}
 				rodada++;
 			}if(rodada == 2) {
-				
+				t.imprimeCartasHumano();
+				t.getJogada2Humano();
+				query.setDescription(current_game_state);
+				t.getJogadaRoboRodada2(query);
+				if(current_game_state.getCartaRodada2Humano() > current_game_state.getCartaRodada2Robo()) {
+					System.out.println("Ganhou Humano Rodada2");
+					current_game_state.setGanhadorRodada2(10);
+				}else {
+					System.out.println("Ganhou Robo Rodada2");
+					current_game_state.setGanhadorRodada2(20);
+				}
+				rodada++;
 			}
 			
 			fimrodada = true;
